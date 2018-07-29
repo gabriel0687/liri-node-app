@@ -1,15 +1,17 @@
+require("dotenv").config();
+
 // Load exports from keys.js file which has Twitter auth keys
 var keys = require("./keys.js");
 var twitterCredentials = keys.twitterKeys;
 
-// node liri.js [ command ] [ query - optional ]
+
 var command = process.argv[2];
 var query = process.argv[3];
 
 // Functions for 3 main functions of the app
-// 	--> do-what-it-says requires the use of functions
+
 var myTweets = function() {
-	// Load twitter module from npm
+	
 	var Twitter = require('twitter');
 
 	// From exports of keys.js file
@@ -18,19 +20,21 @@ var myTweets = function() {
 		consumer_secret: twitterCredentials.consumer_secret,
 		access_token_key: twitterCredentials.access_token_key,
 		access_token_secret: twitterCredentials.access_token_secret
+
+		
 	});
 
 	// Twitter API parameters
 	var params = {
-		screen_name: 'GiantGreenLion',
+		screen_name: '@gabriel62837810',
 		count: 20
 	};
 
 	// GET request for last 20 tweets on my account's timeline
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
-		if(error) { // if there IS an error
+		if(error) { 
 			console.log('Error occurred: ' + error);
-		} else { // if there is NO error
+		} else { 
 	  	console.log("My 20 Most Recent Tweets");
 	  	console.log("");
 
@@ -57,7 +61,7 @@ var spotifyThisSong = function(trackQuery) {
 	    if(error) { // if error
 	        console.log('Error occurred: ' + error);
 	    } else { // if no error
-	    	// For loop is for when a track has multiple artists
+			// For loop is for when a track has multiple artists
 				for(var i = 0; i < data.tracks.items[0].artists.length; i++) {
 					if(i === 0) {
 						console.log("Artist(s):    " + data.tracks.items[0].artists[i].name);
@@ -84,7 +88,7 @@ var movieThis = function(movieQuery) {
 	}
 
 	// HTTP GET request
-	request("http://www.omdbapi.com/?t=" + movieQuery + "&y=&plot=short&r=json", function(error, response, body) {
+	request("http://www.omdbapi.com/?apikey=trilogy" + movieQuery + "&y=&plot=short&r=json", function(error, response, body) {
 	  if (!error && response.statusCode === 200) {
 	    console.log("* Title of the movie:         " + JSON.parse(body).Title);
 	    console.log("* Year the movie came out:    " + JSON.parse(body).Year);
