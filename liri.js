@@ -14,7 +14,7 @@ var myTweets = function() {
 	
 	var Twitter = require('twitter');
 
-	// From exports of keys.js file
+	// exports of keys.js file
 	var client = new Twitter({
 		consumer_key: twitterCredentials.consumer_key,
 		consumer_secret: twitterCredentials.consumer_secret,
@@ -26,7 +26,7 @@ var myTweets = function() {
 
 	// Twitter API parameters
 	var params = {
-		screen_name: '@gabriel62837810',
+		screen_name: 'gabriel62837810',
 		count: 20
 	};
 
@@ -48,7 +48,7 @@ var myTweets = function() {
 }
 
 var spotifyThisSong = function(trackQuery) {
-	// Load Spotify npm package
+	
 	var spotify = require('spotify');
 
 	// if no trackQuery is passed in, then we will be querying for this particular song
@@ -56,11 +56,11 @@ var spotifyThisSong = function(trackQuery) {
 		trackQuery = "the sign ace of base";
 	}
 
-	// Spotify API request (if an object is returned, output the first search result's artist(s), song, preview link, and album)
+	// Spotify API request
 	spotify.search({ type: 'track', query: trackQuery }, function(error, data) {
-	    if(error) { // if error
+	    if(error) { 
 	        console.log('Error occurred: ' + error);
-	    } else { // if no error
+	    } else { 
 			// For loop is for when a track has multiple artists
 				for(var i = 0; i < data.tracks.items[0].artists.length; i++) {
 					if(i === 0) {
@@ -79,7 +79,7 @@ var spotifyThisSong = function(trackQuery) {
 }
 
 var movieThis = function(movieQuery) {
-	// Load request npm module
+	
 	var request = require("request");
 
 	// if query that is passed in is undefined, Mr. Nobody becomes the default
@@ -99,7 +99,7 @@ var movieThis = function(movieQuery) {
 	    console.log("* Actors in the movie:        " + JSON.parse(body).Actors);
 
 	    // For loop parses through Ratings object to see if there is a RT rating
-	    // 	--> and if there is, it will print it
+	 
 	    for(var i = 0; i < JSON.parse(body).Ratings.length; i++) {
 	    	if(JSON.parse(body).Ratings[i].Source === "Rotten Tomatoes") {
 	    		console.log("* Rotten Tomatoes Rating:     " + JSON.parse(body).Ratings[i].Value);
@@ -127,8 +127,8 @@ if(command === "my-tweets") {
 		var command;
 		var query;
 
-		// If there is a comma, then we will split the string from file in order to differentiate between the command and query
-		// 	--> if there is no comma, then only the command is considered (my-tweets)
+		
+		// if there is no comma, then only the command is considered (my-tweets)
 		if(data.indexOf(",") !== -1) {
 			var dataArr = data.split(",");
 			command = dataArr[0];
@@ -144,12 +144,12 @@ if(command === "my-tweets") {
 			spotifyThisSong(query);
 		} else if(command === "movie-this") {
 			movieThis(query);
-		} else { // Use case where the command is not recognized
+		} else { 
 			console.log("Command from file is not a valid command! Please try again.")
 		}
 	});
-} else if(command === undefined) { // use case where no command is given
+} else if(command === undefined) { 
 	console.log("Please enter a command to run LIRI.")
-} else { // use case where command is given but not recognized
+} else { 
 	console.log("Command not recognized! Please try again.")
 }
