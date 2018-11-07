@@ -1,7 +1,9 @@
 liri-node-app
+
 LIRI a Language Interpretation and Recognition Interface.
 
 Description:
+
 LIRI a Language Interpretation and Recognition Interface, that works from the command line. Allowing the user look for the latest personal tweet, search information about a movie or song. You just need to ask:
 
 my-tweets
